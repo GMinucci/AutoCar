@@ -12,6 +12,7 @@ from plotter import Plotter
 class BotFactory():
 
     settings = None
+    mutation_count = 0
 
     def __init__(self, settings):
         self.settings = settings
@@ -66,6 +67,7 @@ class BotFactory():
         new_weights = weights
         for i in range(len(weights)):
             if random() < self.settings.mutation_rate:
+                self.mutation_count = self.mutation_count + 1
                 mutation = self.settings.mutation_factor * \
                     (2 * random() - 1)
                 new_weights[i] = weights[i] + mutation
@@ -106,16 +108,17 @@ if __name__ == "__main__":
             print("------------")
             print("Current best bot: \n%s" % sorted_bots[0][0])
         plotter.add_fitness(sorted_bots[0][1])
+        plotter.add_mutation(factory.mutation_count)
+        factory.mutation_count = 0
         bots = factory.run_generation(bots)
         print("AMOUNT: %s" % len(bots))
-        # if sorted_bots[0][1] < factory.settings.approach_change_parameter:
-        #     factory.settings.change_approach()
-        # factory.reset_counters()
+        if sorted_bots[0][1] < factory.settings.approach_change_parameter:
+            factory.settings.change_approach()
 
     final = sorted(bots, key=lambda tup: tup[1], reverse=True)[:1][0]
     print("-----------")
     print("-- Final --")
     print("Fitness: %s" % final[1])
     print("Best bot: \n%s" % final[0])
-    # plotter.show()
-    # factory.save_to_csv(bots, "final_generation.csv")
+    plotter.show()
+    factory.save_to_csv(bots, "final_generation.csv")

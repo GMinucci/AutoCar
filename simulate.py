@@ -11,12 +11,12 @@ clock = pygame.time.Clock()
 
 weights_data = json.load(open('weights.txt'))
 weights = weights_data["weights"]
-best_bot_weight = [-0.9649205275728165, 0.13581275475099452, -1.5822522167855742, 1.9877229672881493, -1.1663725759796186, -2.9936308429223284, 0.19894375082619742, -0.6473870618447436, -1.2214740535884077, 0.3336941806985566]
+# best_bot_weight = [-0.9649205275728165, 0.13581275475099452, -1.5822522167855742, 1.9877229672881493, -1.1663725759796186, -2.9936308429223284, 0.19894375082619742, -0.6473870618447436, -1.2214740535884077, 0.3336941806985566]
 
 font = pygame.font.SysFont("monospace", 20)
 road = Road(with_mouse=False)
-# player = Car(weights)
-player = Car(best_bot_weight)
+player = Car(weights)
+# player = Car(best_bot_weight)
 
 last_pos = 320
 total_score = 0

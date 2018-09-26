@@ -26,7 +26,7 @@ class Settings(object):
 
     # amount of generation to run. Too many generations can cause longer runs.
     # Too little generations can not end with a good specie
-    generation_amount = 30
+    generation_amount = 2
 
     # configure to change if want to normalize the input data
     should_normalize = False
