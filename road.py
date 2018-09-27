@@ -23,7 +23,7 @@ class Road(object):
             self.move_counter += 1
 
     def mouse_move_map(self, pos):
-        if not self.draw:
+        if not self.drawing:
             self.mouse_map.pop(0)
         self.mouse_map.append(pos)
 
@@ -48,7 +48,7 @@ class Road(object):
 
     def snap_map(self, y_pos):
         if self.with_mouse:
-            self.mouse_snap_map(y_pos)
+            return self.mouse_snap_map(y_pos)
         else:
             delta_pos = self.move_counter + y_pos
             if delta_pos > 0 and delta_pos < len(map_draw):
